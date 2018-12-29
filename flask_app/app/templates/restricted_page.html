@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block title %}Restricted Page{% endblock %}
+{% block content %}
+{{ super() }}
+<div class="container">
+<h2>You can only see this page if you are logged in.</h2>
+</div>
+{% endblock content %}
