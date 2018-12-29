@@ -1,2 +1,2 @@
-FLASK_APP=flask_app
+FLASK_APP=flask_ssa
 FLASK_ENV=development
