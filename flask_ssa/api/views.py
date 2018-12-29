@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify
-from flask_app.extensions import login_manager
-from flask_app.auth.models import User, users_schema, user_schema
+from flask_ssa.extensions import login_manager
+from flask_ssa.auth.models import User, users_schema, user_schema
 from flask_login import current_user
 import base64
 

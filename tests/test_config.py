@@ -1,6 +1,6 @@
 #! ../env/bin/python
 # -*- coding: utf-8 -*-
-from flask_app import create_app
+from flask_ssa import create_app
 
 
 class TestConfig:

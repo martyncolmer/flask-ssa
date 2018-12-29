@@ -2,7 +2,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField
 from wtforms import validators
 
-from flask_app.auth.models import User
+from flask_ssa.auth.models import User
 
 
 class LoginForm(FlaskForm):

@@ -4,8 +4,8 @@ import os
 
 from flask_script import Manager, Server
 from flask_script.commands import ShowUrls, Clean
-from flask_app import create_app
-from flask_app.auth.models import db, User
+from flask_ssa import create_app
+from flask_ssa.auth.models import db, User
 
 # default to dev config because no one should use this in
 # production anyway

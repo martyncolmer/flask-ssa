@@ -1,7 +1,7 @@
 import pytest
 
-from flask_app import create_app
-from flask_app.auth.models import db, User
+from flask_ssa import create_app
+from flask_ssa.auth.models import db, User
 
 
 @pytest.fixture()

@@ -1,9 +1,9 @@
 from flask import Flask
 from flask_bootstrap import Bootstrap
-from flask_app.app.views import main
-from flask_app.auth.views import auth
-from flask_app.api.views import api
-from flask_app.extensions import (
+from flask_ssa.app.views import main
+from flask_ssa.auth.views import auth
+from flask_ssa.api.views import api
+from flask_ssa.extensions import (
     cache,
     debug_toolbar,
     login_manager,

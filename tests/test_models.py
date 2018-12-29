@@ -3,8 +3,8 @@
 
 import pytest
 
-from flask_app.extensions import db
-from flask_app.auth.models import User
+from flask_ssa.extensions import db
+from flask_ssa.auth.models import User
 
 create_user = False
 
