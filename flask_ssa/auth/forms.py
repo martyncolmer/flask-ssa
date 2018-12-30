@@ -21,7 +21,7 @@ class LoginForm(FlaskForm):
         user = User.query.filter_by(username=self.username.data).first()
         if not user:
             self.username.errors.append('Invalid username or password')
-            return Falses
+            return False
 
         if not user.password:
             self.username.errors.append('Invalid account')

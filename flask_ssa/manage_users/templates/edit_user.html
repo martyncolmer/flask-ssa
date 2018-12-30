@@ -2,25 +2,23 @@
 {% import "bootstrap/wtf.html" as wtf %}
 
 {% block title %}
-Login
+User details
 {% endblock %}
 
 {% block content %}
-{{ super() }}
 <br>
 <div class="container">
     <div class="row">
     <div class="col-md-2"></div>
-    <div class="col-md-4">
-    <h1>Login</h1>
-    </div>
+    <h2>User details</h2>
     </div>
 </div>
 <div class="container">
     <div class="row">
-        <div class="col-md-2"></div>
-        <div class="col-md-4">
-        <form action="" method="post" class="form" role="form">
+    <div class="col-md-2"></div>
+    <div class="col-md-4">
+
+        <form action="" method="post" class="form" role="form" autocomplete="new-password">
             {{ form.csrf_token }}
             {% for field in form %}
                 {% if field.type != "SubmitField" %}
@@ -28,20 +26,22 @@ Login
                         <div class="form-group">
                             {{ field.label(class_="form-control-label") }}
                             {% if field.errors %}
-                            {{ field(class_="form-control is-invalid") }}
+                            {{ field(class_="form-control is-invalid", autocomplete="new-password") }}
                             {% for error in field.errors %}
                                 <div class="invalid-feedback">{{ error }}</div>
                             {% endfor %}
                         {% else %}
-                            {{ field(class_="form-control") }}
+                            {{ field(class_="form-control", autocomplete="new-password") }}
                         {% endif %}
                         </div>
                     {% endif %}
                 {% endif %}
             {% endfor %}
-            {{ form.submit(class_="btn btn-primary") }}
+            {{ form.save(class_="btn btn-primary") }}
         </form>
-        </div>
+
+
+    </div>
     </div>
 </div>
 {% endblock %}

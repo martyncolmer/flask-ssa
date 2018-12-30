@@ -3,6 +3,7 @@ from flask_bootstrap import Bootstrap
 from flask_ssa.app.views import main
 from flask_ssa.auth.views import auth
 from flask_ssa.api.views import api
+from flask_ssa.manage_users.views import manage_users
 from flask_ssa.extensions import (
     cache,
     debug_toolbar,
@@ -39,5 +40,5 @@ def create_app(object_name=None):
     app.register_blueprint(main)
     app.register_blueprint(auth)
     app.register_blueprint(api)
-
+    app.register_blueprint(manage_users)
     return app
