@@ -23,7 +23,7 @@
                     </ul>
                     {% if current_user.is_authenticated %}
                         <span class="navbar-text">
-                            User: {{ current_user.username }}
+                            User: {{ current_user.firstname }} {{ current_user.surname }}
                         </span>
                         <ul class="nav navbar-nav">
                             <a class="nav-link" href="{{ url_for('auth.logout') }}">Logout</a>
