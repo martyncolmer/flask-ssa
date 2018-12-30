@@ -11,7 +11,7 @@ def get_manager_list():
     users = User.query.filter(User.role.in_(['Manager','Regional Manager'])).all()
     result = []
     for user in users:
-        result.append([user.emp_no, user.firstname])
+        result.append([user.emp_no, user.firstname + ' ' + user.surname ])
     return result
 
 
@@ -34,7 +34,7 @@ def edit_user(username):
         db.session.commit()
         return redirect(url_for(".list_users"))
 
-    return render_template('edit_user.html',form=form)
+    return render_template('edit_user.html',form=form, title='User details')
 
 
 @manage_users.route("/add_user", methods=["GET", "POST"])
@@ -51,5 +51,5 @@ def add_user():
         db.session.commit()
         return redirect(url_for(".list_users"))
 
-    return render_template('edit_user.html',form=form)
+    return render_template('edit_user.html',form=form, title='New User')
 

@@ -10,22 +10,25 @@ User details
 <div class="container">
     <div class="row">
     <div class="col-md-2"></div>
-    <h2>User details</h2>
+        <div class="col-md-10">
+            <h2>{{ title }}</h2>
+        </div>
     </div>
 </div>
 <div class="container">
     <div class="row">
     <div class="col-md-2"></div>
-    <div class="col-md-4">
+    <div class="col-md-10">
 
-        <form action="" method="post" class="form" role="form" autocomplete="new-password">
-            {{ form.csrf_token }}
-            {% for field in form %}
-                {% if field.type != "SubmitField" %}
-                    {% if field.type != "CSRFTokenField" %}
-                        <div class="form-group">
-                            {{ field.label(class_="form-control-label") }}
-                            {% if field.errors %}
+    <form action="" method="post" class="form" role="form" autocomplete="new-password">
+        {{ form.csrf_token }}
+        {% for field in form %}
+            {% if field.type != "SubmitField" %}
+                {% if field.type != "CSRFTokenField" %}
+                    <div class="form-group row">
+                        {{ field.label(class_="col-sm-3 col-form-label") }}
+                        <div class="col-sm-6">
+                        {% if field.errors %}
                             {{ field(class_="form-control is-invalid", autocomplete="new-password") }}
                             {% for error in field.errors %}
                                 <div class="invalid-feedback">{{ error }}</div>
@@ -34,11 +37,12 @@ User details
                             {{ field(class_="form-control", autocomplete="new-password") }}
                         {% endif %}
                         </div>
-                    {% endif %}
+                    </div>
                 {% endif %}
-            {% endfor %}
-            {{ form.save(class_="btn btn-primary") }}
-        </form>
+            {% endif %}
+        {% endfor %}
+        {{ form.save(class_="btn btn-primary") }}
+    </form>
 
 
     </div>

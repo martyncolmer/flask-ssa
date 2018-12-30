@@ -8,36 +8,44 @@ List users
 <br>
 <div class="container">
     <div class="row">
-        <div class="col-md-10">
+        <div class="col-md-4">
             <h2>Users</h2>
         </div>
-        <div class="col-md-2">
-            <a class="btn btn-primary" href="{{ url_for('manage_users.add_user') }}">Add new user</a>
+        <div class="col-md-4">
+            <div class="btn-group float-right" role="group">
+                <a class="btn btn-secondary btn-md" href="{{ url_for('manage_users.add_user') }}">Add new user</a>
+            </div>
         </div>
     </div>
 </div>
 <div class="container">
+    <div class="row">
     <div class="col-md-8">
         <table class="table table-sm">
             <thead>
                 <tr>
-                    <th scope="col">Username</th>
                     <th scope="col">First name</th>
                     <th scope="col">Surname</th>
+                    <th scope="col">Role</th>
+                    <th scope="col">Username</th>
                     <th></th>
+
                 </tr>
             </thead>
             <tbody>
             {% for user in users %}
                 <tr>
-                    <td scope="row">{{ user.username }}</td>
                     <td>{{ user.firstname }}</td>
                     <td>{{ user.surname }}</td>
-                    <td><a href="{{ url_for('manage_users.edit_user', username=user.username) }}">Edit</a> </td>
+                    <td>{{ user.role }}</td>
+                    <td>{{ user.username }}</td>
+                    <td><a href="{{ url_for('manage_users.edit_user', username=user.username) }}">Edit</a>
+                    <a href="#">Delete</a></>
                 </tr>
             {% endfor %}
             </tbody>
         </table>
+    </div>
     </div>
 </div>
 {% endblock %}
