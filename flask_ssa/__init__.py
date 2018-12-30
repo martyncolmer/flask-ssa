@@ -29,7 +29,6 @@ def create_app(object_name=None):
 
     # initialize SQLAlchemy
     db.init_app(app)
-
     ma.init_app(app)
 
     login_manager.init_app(app)

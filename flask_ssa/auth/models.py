@@ -8,11 +8,11 @@ class User(db.Model, UserMixin):
     id = db.Column(db.Integer(), primary_key=True)
     username = db.Column(db.String(80))
     password = db.Column(db.String(255))
-    emp_no = db.Column(db.Integer)
+    emp_no = db.Column(db.String(20))
     firstname = db.Column(db.String(255))
     surname = db.Column(db.String(255))
     role = db.Column(db.String(50))
-    manager_emp_no = db.Column(db.Integer)
+    manager_emp_no = db.Column(db.String(20))
     api_key = db.Column(db.String(255))
 
     def __init__(self, username=None, password=None):

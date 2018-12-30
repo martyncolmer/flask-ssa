@@ -7,6 +7,14 @@ from flask_ssa.auth.models import User
 manage_users = Blueprint('manage_users', __name__, url_prefix='/users', template_folder='templates')
 
 
+def get_manager_list():
+    users = User.query.filter(User.role == 'Manager').all()
+    result = []
+    for user in users:
+        result.append([user.emp_no, user.firstname])
+    return result
+
+
 @manage_users.route("/list_users")
 @login_required
 def list_users():
@@ -19,6 +27,8 @@ def list_users():
 def edit_user(username):
     user = User.query.filter_by(username=username).one()
     form = EditUser(obj=user)
+    form.manager_emp_no.choices = [('', '')]
+    form.manager_emp_no.choices += get_manager_list()
     if form.validate_on_submit():
         form.populate_obj(user)
         db.session.commit()
@@ -32,6 +42,8 @@ def edit_user(username):
 def add_user():
     user = User()
     form = AddUser(obj=user)
+    form.manager_emp_no.choices = [('', '')]
+    form.manager_emp_no.choices += get_manager_list()
     if form.validate_on_submit():
         form.populate_obj(user)
         user.set_password(form.password.data)
