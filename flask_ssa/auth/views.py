@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, flash, request, redirect, url_for
 from flask_login import login_user, logout_user
 from flask_ssa.extensions import login_manager
 from flask_ssa.auth.forms import LoginForm
-from flask_ssa.auth.models import User
+from flask_ssa.manage_users.models import User
 
 auth = Blueprint('auth', __name__, template_folder='templates')
 

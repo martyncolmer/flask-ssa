@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, url_for, redirect
 from flask_login import login_required
 from flask_ssa.manage_users.forms import EditUser, AddUser
 from flask_ssa.extensions import db
-from flask_ssa.auth.models import User
+from flask_ssa.manage_users.models import User
 
 manage_users = Blueprint('manage_users', __name__, url_prefix='/users', template_folder='templates')
 

@@ -4,7 +4,7 @@
 import pytest
 
 from flask_ssa.extensions import db
-from flask_ssa.auth.models import User
+from flask_ssa.manage_users.models import User
 
 create_user = False
 

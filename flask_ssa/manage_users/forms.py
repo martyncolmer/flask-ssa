@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, SelectField
 from wtforms import validators
-from flask_ssa.auth.models import User
+from flask_ssa.manage_users.models import User
 
 
 role_choices = [('', ''), ('Interviewer', 'Interviewer'), ('Manager', 'Manager'), ('Regional Manager', 'Regional Manager'),('HQ', 'HQ')]
