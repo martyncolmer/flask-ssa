@@ -8,7 +8,7 @@ manage_users = Blueprint('manage_users', __name__, url_prefix='/users', template
 
 
 def get_manager_list():
-    users = User.query.filter(User.role == 'Manager').all()
+    users = User.query.filter(User.role.in_(['Manager','Regional Manager'])).all()
     result = []
     for user in users:
         result.append([user.emp_no, user.firstname])
