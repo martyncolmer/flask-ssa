@@ -1,5 +1,5 @@
-from flask import Blueprint, render_template, url_for, redirect
-from flask_login import login_required
+from flask import Blueprint, render_template, url_for, redirect, flash
+from flask_login import login_required, current_user
 from flask_ssa.manage_users.forms import EditUser, AddUser
 from flask_ssa.extensions import db
 from flask_ssa.manage_users.models import User
@@ -34,7 +34,7 @@ def edit_user(username):
         db.session.commit()
         return redirect(url_for(".list_users"))
 
-    return render_template('edit_user.html',form=form, title='User details')
+    return render_template('edit_user.html',form=form, title='User details', user=user)
 
 
 @manage_users.route("/add_user", methods=["GET", "POST"])
@@ -53,3 +53,15 @@ def add_user():
 
     return render_template('edit_user.html',form=form, title='New User')
 
+
+@manage_users.route("/delete_user/<username>")
+@login_required
+def delete_user(username):
+    if current_user.role == 'HQ':
+        user = User.query.filter_by(username=username).one()
+        db.session.delete(user)
+        db.session.commit()
+        flash("User has been deleted", "success")
+    else:
+        flash("You do not have permissions to delete the user", "warning")
+    return redirect(url_for(".list_users"))

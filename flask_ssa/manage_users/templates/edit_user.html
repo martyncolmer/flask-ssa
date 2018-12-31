@@ -9,13 +9,23 @@ User details
 <br>
 <div class="container">
     <div class="row">
-    <div class="col-md-2"></div>
-        <div class="col-md-10">
+        <div class="col-md-2"></div>
+        <div class="col-md-3">
             <h2>{{ title }}</h2>
         </div>
+        {% if title=="User details" %}
+        {% if current_user.role=="HQ" %}
+        <div class="col-md-6">
+            <div class="col-md-9">
+            <button type="button" class="btn btn-secondary btn-sm float-right" data-toggle="modal" data-target="#deleteModal">
+            Delete User
+            </button>
+            </div>
+        </div>
+        {% endif %}
+        {% endif %}
     </div>
-</div>
-<div class="container">
+
     <div class="row">
     <div class="col-md-2"></div>
     <div class="col-md-10">
@@ -26,8 +36,10 @@ User details
             {% if field.type != "SubmitField" %}
                 {% if field.type != "CSRFTokenField" %}
                     <div class="form-group row">
-                        {{ field.label(class_="col-sm-3 col-form-label") }}
-                        <div class="col-sm-6">
+                        <div class="col-md-3">
+                            {{ field.label(class_="col-form-label") }}
+                        </div>
+                        <div class="col-md-6">
                         {% if field.errors %}
                             {{ field(class_="form-control is-invalid", autocomplete="new-password") }}
                             {% for error in field.errors %}
@@ -41,11 +53,41 @@ User details
                 {% endif %}
             {% endif %}
         {% endfor %}
-        {{ form.save(class_="btn btn-primary") }}
+
+        <div class="form-group row"></div>
+        <div class="col-md-9">
+        {{ form.save(class_="btn btn-primary btn-sm float-right") }}
+        </div>
     </form>
 
 
     </div>
     </div>
 </div>
+
+{% if title=="User details" %}
+<!-- Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteModalLabel">Delete User</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Are you sure you wish to delete the user?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <a class="btn btn-primary" href="{{ url_for('manage_users.delete_user', username=user.username) }}">Delete user</a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
 {% endblock %}
+
+
+

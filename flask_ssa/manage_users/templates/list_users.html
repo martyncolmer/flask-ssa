@@ -11,16 +11,16 @@ List users
         <div class="col-md-4">
             <h2>Users</h2>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-6">
             <div class="btn-group float-right" role="group">
-                <a class="btn btn-secondary btn-md" href="{{ url_for('manage_users.add_user') }}">Add new user</a>
+                <a class="btn btn-secondary btn-sm" href="{{ url_for('manage_users.add_user') }}">Add new user</a>
             </div>
         </div>
     </div>
 </div>
 <div class="container">
     <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-10">
         <table class="table table-sm">
             <thead>
                 <tr>
@@ -39,8 +39,10 @@ List users
                     <td>{{ user.surname }}</td>
                     <td>{{ user.role }}</td>
                     <td>{{ user.username }}</td>
-                    <td><a href="{{ url_for('manage_users.edit_user', username=user.username) }}">Edit</a>
-                    <a href="#">Delete</a></>
+                    <td class="float-right">
+                        <a class="btn btn-primary btn-sm"
+                           href="{{ url_for('manage_users.edit_user', username=user.username) }}">Edit</a>
+                    </td>
                 </tr>
             {% endfor %}
             </tbody>
