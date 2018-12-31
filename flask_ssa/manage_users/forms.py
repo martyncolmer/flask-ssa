@@ -50,3 +50,22 @@ class AddUser(FlaskForm):
             return False
 
         return True
+
+
+class ChangePassword(FlaskForm):
+    password = PasswordField(u'Password', validators=[validators.required()])
+    confirm_password = PasswordField(u'Confirm Password', validators=[validators.required()])
+    save = SubmitField('Save', id="save_button")
+
+    def validate(self):
+        check_validate = super(ChangePassword, self).validate()
+
+        # if our validators do not pass
+        if not check_validate:
+            return False
+
+        if self.password.data != self.confirm_password.data:
+            self.password.errors.append('Passwords do not match')
+            return False
+
+        return True

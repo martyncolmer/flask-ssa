@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, url_for, redirect, flash
 from flask_login import login_required, current_user
-from flask_ssa.manage_users.forms import EditUser, AddUser
+from flask_ssa.manage_users.forms import EditUser, AddUser, ChangePassword
 from flask_ssa.extensions import db
 from flask_ssa.manage_users.models import User
 
@@ -65,3 +65,20 @@ def delete_user(username):
     else:
         flash("You do not have permissions to delete the user", "warning")
     return redirect(url_for(".list_users"))
+
+
+@manage_users.route("/change_password/<username>", methods=["GET", "POST"])
+@login_required
+def change_password(username):
+    if current_user.role == 'HQ':
+        form = ChangePassword()
+        user = User.query.filter_by(username=username).one()
+        if form.validate_on_submit():
+            user.set_password(form.password.data)
+            db.session.commit()
+            flash("Password updated", "success")
+            return redirect(url_for(".edit_user", username=username))
+        return render_template('edit_user.html', form=form, title='Change password')
+    else:
+        flash("You do not have permissions to change the password", "warning")
+        return redirect(url_for(".edit_user", username=username))

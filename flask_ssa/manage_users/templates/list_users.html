@@ -13,7 +13,9 @@ List users
         </div>
         <div class="col-md-6">
             <div class="btn-group float-right" role="group">
+                {% if current_user.role=="HQ" %}
                 <a class="btn btn-secondary btn-sm" href="{{ url_for('manage_users.add_user') }}">Add new user</a>
+                {% endif %}
             </div>
         </div>
     </div>
@@ -39,8 +41,8 @@ List users
                     <td>{{ user.surname }}</td>
                     <td>{{ user.role }}</td>
                     <td>{{ user.username }}</td>
-                    <td class="float-right">
-                        <a class="btn btn-primary btn-sm"
+                    <td>
+                        <a class="btn btn-primary btn-sm float-right"
                            href="{{ url_for('manage_users.edit_user', username=user.username) }}">Edit</a>
                     </td>
                 </tr>
