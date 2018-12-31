@@ -13,7 +13,7 @@ class EditUser(FlaskForm):
     firstname = StringField(u'First name', validators=[validators.required()])
     surname = StringField(u'Surname', validators=[validators.optional()])
     role = SelectField(u'Role', choices=role_choices, validators=[validators.required()])
-    manager_emp_no = SelectField(u'Manager employee number', choices=[], validators=[validators.optional()])
+    manager_emp_no = SelectField(u'Manager', choices=[], validators=[validators.optional()])
     save = SubmitField('Save', id="save_button")
 
     def validate(self):
@@ -33,7 +33,7 @@ class AddUser(FlaskForm):
     firstname = StringField(u'First name', validators=[validators.required()])
     surname = StringField(u'Surname', validators=[validators.optional()])
     role = SelectField(u'Role', choices=role_choices, validators=[validators.required()])
-    manager_emp_no = SelectField(u'Manager employee number', choices=[], validators=[validators.optional()])
+    manager_emp_no = SelectField(u'Manager', choices=[], validators=[validators.optional()])
     save = SubmitField('Save', id="save_button")
 
     def validate(self):
