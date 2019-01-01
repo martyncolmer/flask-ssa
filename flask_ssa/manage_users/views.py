@@ -20,20 +20,22 @@ def get_manager_list():
 def list_users():
     page = request.args.get('page', 1, type=int)
     search = request.args.get('search', None, type=str)
-    next_url = None
-    prev_url = None
 
     if search:
         users = User.query.filter(User.surname.like('%' + search + '%'))\
             .order_by(User.surname).all()
-        return render_template('list_users.html', users=users, next_url=next_url, prev_url=prev_url)
+        return render_template('list_users.html', users=users)
     else:
         users = User.query.order_by(User.surname)\
             .paginate(page, current_app.config['USERS_PER_PAGE'], False)
         if users.has_next:
             next_url = url_for('manage_users.list_users', page=users.next_num)
+        else:
+            next_url = None
         if users.has_prev:
             prev_url = url_for('manage_users.list_users', page=users.prev_num)
+        else:
+            prev_url = None
         return render_template('list_users.html', users=users.items, next_url=next_url, prev_url=prev_url)
 
 
