@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, url_for, redirect, flash
+from flask import Blueprint, render_template, url_for, redirect, flash, request, current_app
 from flask_login import login_required, current_user
 from flask_ssa.manage_users.forms import EditUser, AddUser, ChangePassword
 from flask_ssa.extensions import db
@@ -18,8 +18,23 @@ def get_manager_list():
 @manage_users.route("/list_users")
 @login_required
 def list_users():
-    users = User.query.order_by(User.surname).all()
-    return render_template('list_users.html', users=users)
+    page = request.args.get('page', 1, type=int)
+    search = request.args.get('search', None, type=str)
+    next_url = None
+    prev_url = None
+
+    if search:
+        users = User.query.filter(User.surname.like('%' + search + '%'))\
+            .order_by(User.surname).all()
+        return render_template('list_users.html', users=users, next_url=next_url, prev_url=prev_url)
+    else:
+        users = User.query.order_by(User.surname)\
+            .paginate(page, current_app.config['USERS_PER_PAGE'], False)
+        if users.has_next:
+            next_url = url_for('manage_users.list_users', page=users.next_num)
+        if users.has_prev:
+            prev_url = url_for('manage_users.list_users', page=users.prev_num)
+        return render_template('list_users.html', users=users.items, next_url=next_url, prev_url=prev_url)
 
 
 @manage_users.route("/edit_user/<username>", methods=["GET", "POST"])
