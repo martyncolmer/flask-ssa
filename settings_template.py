@@ -7,6 +7,7 @@ class Config(object):
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     CACHE_NO_NULL_WARNING = True
     BOOTSTRAP_SERVE_LOCAL = True
+    USERS_PER_PAGE = 10
 
 
 class ProdConfig(Config):
