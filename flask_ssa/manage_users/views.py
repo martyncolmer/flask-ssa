@@ -3,6 +3,7 @@ from flask_login import login_required, current_user
 from flask_ssa.manage_users.forms import EditUser, AddUser, ChangePassword
 from flask_ssa.extensions import db
 from flask_ssa.manage_users.models import User
+from  urllib import parse
 
 manage_users = Blueprint('manage_users', __name__, url_prefix='/users', template_folder='templates')
 
@@ -11,7 +12,7 @@ def get_manager_list():
     users = User.query.filter(User.role.in_(['Manager','Regional Manager'])).all()
     result = []
     for user in users:
-        result.append([user.emp_no, user.firstname + ' ' + user.surname ])
+        result.append([user.emp_no, user.firstname + ' ' + user.surname])
     return result
 
 
@@ -22,7 +23,7 @@ def list_users():
     search = request.args.get('search', None, type=str)
 
     if search:
-        users = User.query.filter(User.surname.like('%' + search + '%'))\
+        users = User.query.filter(User.surname.like('%' + parse.unquote(search) + '%'))\
             .order_by(User.surname).all()
         return render_template('list_users.html', users=users)
     else:
