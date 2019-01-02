@@ -43,6 +43,8 @@ List users
                     <td>{{ user.role }}</td>
                     <td>{{ user.username }}</td>
                     <td>
+                        <button class="btn btn-primary btn-sm get-json" username="{{ user.username }}"
+                           >Get JSON</button>
                         <a class="btn btn-primary btn-sm float-right"
                            href="{{ url_for('manage_users.edit_user', username=user.username) }}">Edit</a>
                     </td>
@@ -91,7 +93,13 @@ List users
 <script>
 $("#search_button").click(function(){
     window.location = "{{ url_for('manage_users.list_users') }}?search="+$("#search_value").val();
-}
-);
+});
+</script>
+<script>
+$(".get-json").click(function(){
+    $.post( "../api/getuser/" + $(this).attr("username") , function( data ) {
+            window.alert(data);
+});
+});
 </script>
 {% endblock %}
