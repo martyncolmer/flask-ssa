@@ -80,7 +80,7 @@ List users
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" onclick="searchForUser()">Search</button>
+        <button id="search_button" type="button" class="btn btn-primary">Search</button>
       </div>
     </div>
   </div>
@@ -89,8 +89,9 @@ List users
 {% block scripts %}
 {{  super() }}
 <script>
- function searchForUser() {
-    window.location = "{{ url_for('manage_users.list_users') }}?search="+document.getElementById("search_value").value;
+$("#search_button").click(function(){
+    window.location = "{{ url_for('manage_users.list_users') }}?search="+$("#search_value").val();
 }
+);
 </script>
 {% endblock %}
