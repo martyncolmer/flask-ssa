@@ -14,6 +14,10 @@ class User(db.Model, UserMixin):
     manager_emp_no = db.Column(db.String(20))
     api_key = db.Column(db.String(255))
 
+    def __repr__(self):
+        return "(username='%s', firstname='%s', surname='%s')" % (
+            self.username, self.firstname, self.surname)
+
     def __init__(self, username=None, password=None):
         if username:
             self.username = username
