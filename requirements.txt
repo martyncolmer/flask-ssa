@@ -29,4 +29,5 @@ six==1.12.0
 SQLAlchemy==1.2.15
 visitor==0.1.3
 Werkzeug==0.14.1
+wfastcgi==3.0.0
 WTForms==2.2.1
